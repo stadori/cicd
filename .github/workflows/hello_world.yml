@@ -1,0 +1,13 @@
+name: Hello world workflow
+on:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  trigger-circleci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rerun Danger Once PR Exists
+        id: rerun-danger-once-pr-exists
+        uses: CircleCI-Public/trigger-circleci-pipeline-action@dd5d85644c1e65f107ecb7f34402c2825b2e418d
+        env:
+          CCI_TOKEN: ${{ secrets.TEMP_TEST_CCI_TOKEN }}
