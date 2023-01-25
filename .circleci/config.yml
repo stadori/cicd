@@ -1,4 +1,8 @@
 version: 2.1
+
+orbs:
+  datadog-agent: datadog/agent@0
+
 jobs:
   # running commands on a basic image
   Hello-World:
@@ -8,6 +12,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
+      - datadog-agent/setup
       - run:
           name: Saying Hello new
           command: |
@@ -39,6 +44,7 @@ jobs:
           name: Running the Node Container
           command: |
             node -v
+      - datadog-agent/stop
 workflows:
   Example-Workflow:
     jobs:
