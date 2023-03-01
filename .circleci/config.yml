@@ -12,6 +12,14 @@ jobs:
       - run: echo "hello world" # run the `echo` command
 
 workflows:
-  my-workflow:
+  sch1:
+    jobs:
+      - hello-job
+
+  sch2:
+    when:
+      and:
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - equal: [ minutely, << pipeline.schedule.name >> ]
     jobs:
       - hello-job
