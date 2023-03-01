@@ -13,6 +13,9 @@ jobs:
 
 workflows:
   sch1:
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - hello-job
 
